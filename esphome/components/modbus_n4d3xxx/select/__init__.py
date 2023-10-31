@@ -12,7 +12,7 @@ from .. import (
 )
 from ..const import (
     CONF_FORCE_NEW_RANGE,
-    CONF_modbus_n4d3xxx_ID,
+    CONF_MODBUS_N4D3XXX_ID,
     CONF_REGISTER_COUNT,
     CONF_SKIP_UPDATES,
     CONF_USE_WRITE_MULTIPLE,
@@ -68,7 +68,7 @@ CONFIG_SCHEMA = cv.All(
     .extend(cv.COMPONENT_SCHEMA)
     .extend(
         {
-            cv.GenerateID(CONF_modbus_n4d3xxx_ID): cv.use_id(N4D3XXXController),
+            cv.GenerateID(CONF_MODBUS_N4D3XXX_ID): cv.use_id(N4D3XXXController),
             cv.Required(CONF_ADDRESS): cv.positive_int,
             cv.Optional(CONF_VALUE_TYPE, default="U_WORD"): cv.enum(
                 INTEGER_SENSOR_VALUE_TYPE
@@ -108,7 +108,7 @@ async def to_code(config):
     await cg.register_component(var, config)
     await select.register_select(var, config, options=list(options_map.keys()))
 
-    parent = await cg.get_variable(config[CONF_modbus_n4d3xxx_ID])
+    parent = await cg.get_variable(config[CONF_MODBUS_N4D3XXX_ID])
     cg.add(parent.add_sensor_item(var))
     cg.add(var.set_parent(parent))
     cg.add(var.set_use_write_mutiple(config[CONF_USE_WRITE_MULTIPLE]))

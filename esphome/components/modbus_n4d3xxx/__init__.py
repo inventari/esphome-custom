@@ -11,7 +11,7 @@ from .const import (
     CONF_OFFLINE_SKIP_UPDATES,
     CONF_CUSTOM_COMMAND,
     CONF_FORCE_NEW_RANGE,
-    CONF_modbus_n4d3xxx_ID,
+    CONF_MODBUS_N4D3XXX_ID,
     CONF_REGISTER_COUNT,
     CONF_REGISTER_TYPE,
     CONF_RESPONSE_SIZE,
@@ -115,7 +115,7 @@ CONFIG_SCHEMA = cv.All(
 
 ModbusItemBaseSchema = cv.Schema(
     {
-        cv.GenerateID(CONF_modbus_n4d3xxx_ID): cv.use_id(N4D3XXXController),
+        cv.GenerateID(CONF_MODBUS_N4D3XXX_ID): cv.use_id(N4D3XXXController),
         cv.Optional(CONF_ADDRESS): cv.positive_int,
         cv.Optional(CONF_CUSTOM_COMMAND): cv.ensure_list(cv.hex_uint8_t),
         cv.Exclusive(

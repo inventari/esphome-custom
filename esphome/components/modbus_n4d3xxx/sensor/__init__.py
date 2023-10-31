@@ -16,7 +16,7 @@ from .. import (
 from ..const import (
     CONF_BITMASK,
     CONF_FORCE_NEW_RANGE,
-    CONF_modbus_n4d3xxx_ID,
+    CONF_MODBUS_N4D3XXX_ID,
     CONF_REGISTER_COUNT,
     CONF_REGISTER_TYPE,
     CONF_SKIP_UPDATES,
@@ -63,6 +63,6 @@ async def to_code(config):
     await cg.register_component(var, config)
     await sensor.register_sensor(var, config)
 
-    paren = await cg.get_variable(config[CONF_modbus_n4d3xxx_ID])
+    paren = await cg.get_variable(config[CONF_MODBUS_N4D3XXX_ID])
     cg.add(paren.add_sensor_item(var))
     await add_modbus_base_properties(var, config, ModbusSensor)

@@ -24,7 +24,7 @@ from ..const import (
     CONF_BITMASK,
     CONF_CUSTOM_COMMAND,
     CONF_FORCE_NEW_RANGE,
-    CONF_modbus_n4d3xxx_ID,
+    CONF_MODBUS_N4D3XXX_ID,
     CONF_REGISTER_TYPE,
     CONF_SKIP_UPDATES,
     CONF_USE_WRITE_MULTIPLE,
@@ -107,7 +107,7 @@ async def to_code(config):
     )
 
     cg.add(var.set_write_multiply(config[CONF_MULTIPLY]))
-    parent = await cg.get_variable(config[CONF_modbus_n4d3xxx_ID])
+    parent = await cg.get_variable(config[CONF_MODBUS_N4D3XXX_ID])
 
     cg.add(var.set_parent(parent))
     cg.add(parent.add_sensor_item(var))

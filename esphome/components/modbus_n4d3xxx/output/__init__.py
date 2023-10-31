@@ -16,7 +16,7 @@ from .. import (
 )
 
 from ..const import (
-    CONF_modbus_n4d3xxx_ID,
+    CONF_MODBUS_N4D3XXX_ID,
     CONF_REGISTER_TYPE,
     CONF_USE_WRITE_MULTIPLE,
     CONF_VALUE_TYPE,
@@ -102,7 +102,7 @@ async def to_code(config):
                 return_type=cg.optional.template(float),
             )
     await output.register_output(var, config)
-    parent = await cg.get_variable(config[CONF_modbus_n4d3xxx_ID])
+    parent = await cg.get_variable(config[CONF_MODBUS_N4D3XXX_ID])
     cg.add(var.set_use_write_mutiple(config[CONF_USE_WRITE_MULTIPLE]))
     cg.add(var.set_parent(parent))
     if CONF_WRITE_LAMBDA in config:
