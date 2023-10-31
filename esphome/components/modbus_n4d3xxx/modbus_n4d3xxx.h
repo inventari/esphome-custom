@@ -45,6 +45,11 @@ enum class ModbusRegisterType : uint8_t {
   READ = 0x04,
 };
 
+enum class ModbusBoardProtocol : uint8_t {
+  DEFAULT = 0x0,
+  N4D3XXX = 0x01
+};
+
 enum class SensorValueType : uint8_t {
   RAW = 0x00,     // variable length
   U_WORD = 0x1,   // 1 Register unsigned
