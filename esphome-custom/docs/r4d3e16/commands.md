@@ -275,7 +275,7 @@ For example, if remote IO sending is currently prohibited, it should be changed 
 
 ### Send data
 | Command | RS485 address(Station address) (1) | Function (1) | Register address (2) | Read number (2) | CRC16(2) |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | read  | `0x01`-`0xFE` | `0X03` | `0x00FA` | `0x0001` |
 | write | `0x01`-`0xFE` | `0x06` | `0x00FA` | `0x0001` |
 
