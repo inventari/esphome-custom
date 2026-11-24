@@ -364,6 +364,16 @@
         lines.push(...registerBase(controllerId, deviceId, name, register, "input"),
           `    value_type: ${register.type}`);
         if (register.unit) lines.push(`    unit_of_measurement: ${JSON.stringify(register.unit)}`);
+        const deviceClass = {
+          "°C": "temperature",
+          "%": "battery",
+          "V": "voltage",
+          "A": "current",
+          "W": "power",
+          "kWh": "energy",
+        }[register.unit];
+        if (deviceClass) lines.push(`    device_class: ${deviceClass}`);
+        lines.push(`    state_class: ${register.unit === "kWh" ? "total_increasing" : "measurement"}`);
         lines.push(`    accuracy_decimals: ${register.accuracyDecimals}`);
         if (register.scale) lines.push("    filters:", `      - multiply: ${register.scale}`);
         if (register.disabledByDefault) lines.push("    disabled_by_default: true");
@@ -379,7 +389,8 @@
               `    bitmask: 0x${(2 ** shift).toString(16).toUpperCase()}`);
           } else {
             sections.sensor.push(...registerBase(controllerId, deviceId, fieldName, register, "input"),
-              "    value_type: U_WORD", `    lambda: return (uint16_t(x) >> ${shift}) & ${2 ** width - 1};`);
+              "    value_type: U_WORD", "    state_class: measurement",
+              `    lambda: return (uint16_t(x) >> ${shift}) & ${2 ** width - 1};`);
           }
         }
       } else if (register.kind === "code") {
